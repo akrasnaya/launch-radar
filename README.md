@@ -19,6 +19,8 @@ python3 -m unittest discover -s tests
 
 Интерфейс открывается на [http://127.0.0.1:8765](http://127.0.0.1:8765). Разбор хранится в памяти процесса, пока сервер запущен.
 
+Репозиторий: [github.com/akrasnaya/launch-radar](https://github.com/akrasnaya/launch-radar).
+
 Отчёты California DMV за 2023 год лежат отдельно от синтетического выпуска. Файл не коммитится:
 
 ```bash
