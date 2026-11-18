@@ -1,0 +1,11 @@
+[project]
+name = "launch-radar"
+version = "0.1.0"
+description = "Open-data prototype for release feedback triage"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+include = ["launch_radar*"]
+
+[tool.setuptools.package-data]
+launch_radar = ["static/*.html"]

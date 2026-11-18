@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LaunchRadar</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f2ee;
+      --paper: #fff;
+      --ink: #1d1c1a;
+      --muted: #5e5a54;
+      --line: #e3ddd4;
+      --accent: #1e3a56;
+      --danger: #8d2d2d;
+      --danger-bg: #f8eeec;
+      --warn: #8a5a12;
+      --warn-bg: #f8f3e8;
+      --ok: #1d6b45;
+      --ok-bg: #eef6f1;
+      --info-bg: #eef3f8;
+      --pilot: #245c86;
+      --holdout: #8a8175;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.45 ui-sans-serif, system-ui, sans-serif;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 72px; }
+    header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 16px; align-items: start; }
+    h1 { margin: 0; font-size: 26px; font-weight: 640; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 10px; font-size: 18px; font-weight: 620; }
+    p { margin: 0; }
+    .muted { color: var(--muted); }
+    .small { color: var(--muted); font-size: 13px; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 12px; }
+    button, select, input, textarea {
+      font: inherit;
+      color: inherit;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    button { height: 32px; padding: 0 12px; cursor: pointer; }
+    button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    button.ghost { background: transparent; }
+    button:disabled { opacity: 0.45; cursor: default; }
+    select, input { height: 32px; padding: 0 8px; }
+    textarea { width: 100%; min-height: 72px; padding: 8px; resize: vertical; }
+    #status { min-height: 1.3em; margin: 0 0 12px; font-size: 14px; }
+    #status.error { color: var(--danger); }
+    #status.ok { color: var(--ok); }
+    .banner { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; background: var(--paper); }
+    .banner.danger { background: var(--danger-bg); border-color: #e4c8c4; }
+    .banner.warn { background: var(--warn-bg); border-color: #ead9b8; }
+    .banner.ok { background: var(--ok-bg); border-color: #cfe3d6; }
+    .banner.info { background: var(--info-bg); border-color: #d3e0ea; }
+    .banner strong { display: block; margin-bottom: 4px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 18px 28px; margin: 16px 0; }
+    .stat b { display: block; font-size: 26px; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .stat.danger b { color: var(--danger); }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 8px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 580; font-size: 12px; }
+    tr:last-child td { border-bottom: 0; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr.danger td:first-child { border-left: 3px solid var(--danger); }
+    tr.ok td:first-child { border-left: 3px solid var(--ok); }
+    tr.warn td:first-child { border-left: 3px solid var(--warn); }
+    .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+    .panel h3 { margin: 0; font-size: 15px; }
+    .split { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .legend { display: flex; gap: 14px; color: var(--muted); font-size: 13px; }
+    .swatch { width: 10px; height: 10px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+    .swatch.pilot { background: var(--pilot); }
+    .swatch.holdout { background: var(--holdout); }
+    .bar-row { display: grid; grid-template-columns: 92px 1fr 88px; gap: 10px; align-items: center; margin: 7px 0; }
+    .track { height: 8px; background: #ece8e2; border-radius: 99px; overflow: hidden; }
+    .track + .track { margin-top: 4px; }
+    .fill { height: 100%; }
+    .fill.pilot { background: var(--pilot); }
+    .fill.holdout { background: var(--holdout); }
+    .bar-value { font-variant-numeric: tabular-nums; font-size: 13px; text-align: right; }
+    label { font-size: 13px; color: var(--muted); }
+    .field { display: flex; flex-direction: column; gap: 4px; max-width: 420px; }
+    @media (max-width: 640px) {
+      .bar-row { grid-template-columns: 1fr; }
+      .bar-value { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>LaunchRadar</h1>
+        <p id="subtitle" class="muted" style="margin-top: 6px"></p>
+      </div>
+      <button type="button" data-action="reset">Сбросить разбор</button>
+    </header>
+    <nav id="nav"></nav>
+    <p id="status" role="status"></p>
+    <main id="main"></main>
+  </div>
+  <script>
+    const SCREENS = [
+      ["overview", "Обзор выпуска"],
+      ["triage", "Разбор отзывов"],
+      ["cluster", "Кластер"],
+      ["risk", "Карточка риска"],
+      ["gate", "Подпись решения"],
+      ["dmv", "DMV 2023"],
+      ["annotate", "Разметка"],
+    ];
+    const ACTION_LABEL = {
+      accept: "Принято",
+      correct: "Исправлено",
+      split: "К разделению",
+      abstain: "Без вердикта",
+    };
+
+    let state = null;
+    let current = "overview";
+    let triageFilter = "all";
+    let riskFilter = "all";
+    let selectedRecord = null;
+    let selectedCluster = null;
+    let draftReviewNote = "";
+    let draftSigner = "";
+    let draftGateNote = "";
+    let busy = false;
+    let dmvState = null;
+    let dmvError = "";
+    let dmvLoading = false;
+    let annotateState = null;
+
+    function esc(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function ratio(value) {
+      return value === null || value === undefined ? "—" : Number(value).toFixed(2);
+    }
+
+    function devices(value) {
+      return new Intl.NumberFormat("ru-RU").format(value);
+    }
+
+    function sentimentLabel(sentiment) {
+      const entries = Object.entries(sentiment || {});
+      if (!entries.length) return "—";
+      const tones = new Set(entries.map((entry) => entry[1]));
+      if (tones.size === 1) return entries[0][1];
+      return entries.map(([topic, tone]) => `${topic}: ${tone}`).join(", ");
+    }
+
+    function cardFor(clusterId) {
+      return state.cards.find((card) => card.cluster_id === clusterId);
+    }
+
+    function visibleItems() {
+      return state.items.filter((item) => {
+        if (triageFilter === "safety") return item.safety_flag;
+        if (triageFilter === "abstain") return item.abstain;
+        if (triageFilter === "open") return !item.review;
+        return true;
+      });
+    }
+
+    function visibleCards() {
+      return state.cards.filter((card) => riskFilter === "all" || card.recommendation === riskFilter);
+    }
+
+    function setStatus(message, isError) {
+      const node = document.querySelector("#status");
+      node.textContent = message || "";
+      node.className = message ? (isError ? "error" : "ok") : "";
+    }
+
+    function ensureTriageSelection() {
+      const visible = visibleItems();
+      if (!visible.length) return;
+      if (visible.some((item) => item.record_id === selectedRecord)) return;
+      selectedRecord = visible[0].record_id;
+      draftReviewNote = visible[0].review?.note ?? "";
+    }
+
+    async function post(url, body) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Запрос не выполнен.");
+      return payload;
+    }
+
+    function applyPayload(payload) {
+      state = payload;
+      const item = state.items.find((row) => row.record_id === selectedRecord);
+      if (item?.review) draftReviewNote = item.review.note;
+      render();
+    }
+
+    function refreshGateButtons() {
+      const expand = document.querySelector('[data-decision="Expand"]');
+      if (expand) expand.disabled = !state.gate.expand_allowed;
+    }
+
+    function render() {
+      if (!state) return;
+      const meta = state.meta;
+      document.querySelector("#subtitle").textContent = current === "annotate"
+        ? "Вторая разметка DMV. Первая метка скрыта, пока формулировка не сохранена."
+        : current === "dmv"
+        ? "Открытые отчёты California DMV за 2023 год. Это не pilot и не holdout."
+        : `Пилот ${meta.pilot_build}, ${devices(meta.pilot_devices)} устройств. ` +
+          `Holdout ${meta.holdout_build}, ${devices(meta.holdout_devices)} устройств. ` +
+          (meta.synthetic ? "Синтетическая выборка. " : "") +
+          "Разбор хранится в памяти сервера до остановки.";
+      document.querySelector("#nav").innerHTML = SCREENS.map(([id, label]) =>
+        `<button type="button" data-screen="${id}" class="${current === id ? "active" : ""}">${label}</button>`
+      ).join("");
+      ensureTriageSelection();
+      if (!selectedCluster && state.clusters.length) selectedCluster = state.clusters[0].cluster_id;
+      const views = { overview: viewOverview, triage: viewTriage, cluster: viewCluster, risk: viewRisk, gate: viewGate, dmv: viewDmv, annotate: viewAnnotate };
+      document.querySelector("#main").innerHTML = views[current]();
+      refreshGateButtons();
+    }
+
+    function viewOverview() {
+      const safety = state.cards.filter((card) => card.safety_flag);
+      const backlog = state.cards.find((card) => card.recommendation === "BACKLOG");
+      const reviewed = state.items.filter((item) => item.review).length;
+      const pending = state.gate.pending_safety.length;
+      const rows = safety.map((card) => {
+        const item = state.items.find((row) => row.cluster_id === card.cluster_id);
+        return `<tr class="danger">
+          <td>${esc(card.cluster_id)}</td>
+          <td>${esc(item.cohort)}</td>
+          <td>${esc(item.build)}</td>
+          <td>${esc(card.severity)}</td>
+          <td>${esc(item.text)}</td>
+        </tr>`;
+      }).join("");
+      return `<div class="stack">
+        <div class="banner danger">
+          <strong>Рекомендация модели: ${esc(state.gate.recommendation)}</strong>
+          <span>${safety.length} safety-кластеров обходят ранжирование по частоте.${backlog ? ` ${esc(backlog.cluster_id)} (${esc(backlog.label)}) остаётся ${esc(backlog.recommendation)} при отношении ${ratio(backlog.rate_ratio)}.` : ""} Подпись человека рекомендацию не пересчитывает.</span>
+        </div>
+        <div class="stats">
+          <div class="stat ${pending ? "danger" : ""}"><b>${pending}</b><span>Safety без разбора</span></div>
+          <div class="stat"><b>${reviewed} / ${state.items.length}</b><span>Сообщений с действием</span></div>
+          <div class="stat danger"><b>${safety.length}</b><span>Кластеры HOLD</span></div>
+          <div class="stat"><b>${backlog ? ratio(backlog.rate_ratio) : "—"}</b><span>Отношение BACKLOG</span></div>
+        </div>
+        <div class="row">
+          <button type="button" class="primary" data-action="triage-safety">Разобрать safety</button>
+          <button type="button" data-action="open-gate">К подписи</button>
+        </div>
+        <h2>Что угрожает выпуску ${esc(state.meta.pilot_build)}</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Кластер</th><th>Когорта</th><th>Сборка</th><th>Severity</th><th>Текст</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <p class="small">Источник: pipeline.py и sample_data.py. Сравнение когорт не является причинным выводом. Evidence сервера — текст, когорта и сборка.</p>
+      </div>`;
+    }
+
+    function filterButton(action, filter, currentFilter, label) {
+      return `<button type="button" data-action="${action}" data-filter="${filter}" class="${currentFilter === filter ? "active" : ""}">${label}</button>`;
+    }
+
+    function viewTriage() {
+      const visible = visibleItems();
+      const filters = [
+        filterButton("triage-filter", "all", triageFilter, `Все ${state.items.length}`),
+        filterButton("triage-filter", "safety", triageFilter, "Safety"),
+        filterButton("triage-filter", "abstain", triageFilter, "Модель не уверена"),
+        filterButton("triage-filter", "open", triageFilter, "Без действия"),
+      ].join("");
+      if (!visible.length) {
+        return `<div class="stack"><h2>Разбор отзывов</h2><div class="row">${filters}</div>
+          <div class="banner ok"><strong>В этом фильтре очередь пуста</strong><span>У каждого сообщения уже есть действие человека.</span></div></div>`;
+      }
+      const selected = visible.find((item) => item.record_id === selectedRecord) || visible[0];
+      const rows = visible.map((item) => {
+        const tone = item.safety_flag && !item.review ? "danger" : item.review ? "ok" : item.abstain ? "warn" : "";
+        return `<tr class="${tone}">
+          <td>${esc(item.record_id)}</td>
+          <td>${esc(item.cohort)}</td>
+          <td>${esc(item.severity)}</td>
+          <td>${item.safety_flag ? "да" : "нет"}</td>
+          <td class="num">${Number(item.confidence).toFixed(2)}</td>
+          <td>${item.review ? esc(ACTION_LABEL[item.review.action]) : "ожидает"}</td>
+        </tr>`;
+      }).join("");
+      const options = visible.map((item) =>
+        `<option value="${esc(item.record_id)}" ${item.record_id === selected.record_id ? "selected" : ""}>${esc(item.record_id)} · ${esc(item.cluster_id)} · ${esc(item.severity)}</option>`
+      ).join("");
+      return `<div class="stack">
+        <h2>Разбор отзывов</h2>
+        <p class="muted">Модель уже проставила тему, тональность, severity и safety. Действие сохраняется на сервере и не запускает классификатор заново.</p>
+        <div class="row">${filters}</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ID</th><th>Когорта</th><th>Severity</th><th>Safety</th><th class="num">Уверенность</th><th>Действие</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <label for="record-select">Сообщение</label>
+        <select id="record-select">${options}</select>
+        <article class="panel stack">
+          <div class="split"><h3>${esc(selected.record_id)} · ${esc(selected.cohort)} · ${esc(selected.build)}</h3><span class="small">${esc(selected.cluster_id)}</span></div>
+          <p>${esc(selected.text)}</p>
+          <p class="muted">Модель: ${esc(selected.topics.join(", "))}; тон ${esc(sentimentLabel(selected.sentiment))}; ${esc(selected.severity)}; уверенность ${Number(selected.confidence).toFixed(2)}. Совпадения: ${esc(selected.matched_terms.join(", "))}. Рекомендация ${esc(selected.recommendation)}.${selected.safety_flag ? " Safety-флаг." : ""}${selected.abstain ? " Модель не уверена: уверенность ниже 0.50." : ""}</p>
+          <div class="row">
+            <button type="button" class="${selected.review?.action === "accept" ? "primary" : ""}" data-action="review" data-review="accept">Принять</button>
+            <button type="button" class="${selected.review?.action === "correct" ? "primary" : ""}" data-action="review" data-review="correct">Исправить</button>
+            <button type="button" class="${selected.review?.action === "split" ? "primary" : ""}" data-action="review" data-review="split">Разделить</button>
+            <button type="button" class="${selected.review?.action === "abstain" ? "primary" : ""}" data-action="review" data-review="abstain" title="Сообщение просмотрено, вердикт не ставлю. Это считается разбором.">Без вердикта</button>
+          </div>
+          <textarea id="review-note" placeholder="Комментарий к действию">${esc(draftReviewNote)}</textarea>
+        </article>
+      </div>`;
+    }
+
+    function viewCluster() {
+      const cluster = state.clusters.find((item) => item.cluster_id === selectedCluster) || state.clusters[0];
+      const card = cardFor(cluster.cluster_id);
+      const options = state.clusters.map((item) =>
+        `<option value="${esc(item.cluster_id)}" ${item.cluster_id === cluster.cluster_id ? "selected" : ""}>${esc(item.cluster_id)} · ${esc(item.label)} · ${esc(cardFor(item.cluster_id).recommendation)}</option>`
+      ).join("");
+      const members = cluster.record_ids.map((recordId) => {
+        const item = state.items.find((row) => row.record_id === recordId);
+        const review = item.review ? `<span class="small">${esc(ACTION_LABEL[item.review.action])}</span>` : "";
+        const note = item.review?.note ? `<p class="small">${esc(item.review.note)}</p>` : "";
+        return `<div class="stack">
+          <div class="row"><strong>${esc(item.record_id)} · ${esc(item.cohort)} · ${esc(item.build)}</strong>${review}
+            <button type="button" class="ghost" data-action="open-record" data-record="${esc(item.record_id)}">Разобрать</button>
+          </div>
+          <p>${esc(item.text)}</p>
+          <p class="small">Темы: ${esc(item.topics.join(", "))}. Тон: ${esc(sentimentLabel(item.sentiment))}. Совпадения: ${esc(item.matched_terms.join(", "))}.</p>
+          ${note}
+        </div>`;
+      }).join("");
+      const pairs = cluster.pairs.length ? `<div class="table-wrap"><table>
+        <thead><tr><th>Пара</th><th class="num">Jaccard</th><th>Общие токены</th></tr></thead>
+        <tbody>${cluster.pairs.map((pair) => `<tr><td>${esc(pair.left)} ~ ${esc(pair.right)}</td><td class="num">${ratio(pair.score)}</td><td>${esc(pair.shared.join(", "))}</td></tr>`).join("")}</tbody>
+      </table></div>
+      <p class="small">Источник: tokenize и Jaccard, порог ${esc(state.meta.cluster_threshold)}. Служебные слова входят в токены.</p>` : "";
+      const single = cluster.record_ids.length === 1 ? `<p>В кластере одна формулировка. Порог склейки ${esc(state.meta.cluster_threshold)}.</p>` : "";
+      const missingRatio = card.rate_ratio === null ? "<p>В одной из когорт нет сообщений, отношение частот не определено.</p>" : "";
+      return `<div class="stack">
+        <h2>Кластер проблемы</h2>
+        <p class="muted">Evidence этого сервера — текст, когорта и сборка.</p>
+        <label for="cluster-select">Кластер</label>
+        <select id="cluster-select">${options}</select>
+        <article class="panel stack">
+          <div class="split"><h3>${esc(cluster.cluster_id)} · ${esc(cluster.label)}</h3><span class="small">${esc(card.recommendation)}</span></div>
+          <p>${esc(card.rationale)}</p>
+          <p class="muted">Severity ${esc(card.severity)}. Уверенность ${Number(card.confidence).toFixed(2)}. Пилот ${card.pilot_count} / ${devices(state.meta.pilot_devices)}, ${ratio(card.pilot_rate)} на 1 000. Holdout ${card.holdout_count} / ${devices(state.meta.holdout_devices)}, ${ratio(card.holdout_rate)} на 1 000. Отношение ${ratio(card.rate_ratio)}.${card.safety_flag ? " Safety-флаг." : ""}</p>
+          ${single}${missingRatio}${members}
+        </article>
+        ${pairs}
+      </div>`;
+    }
+
+    function viewRisk() {
+      const visible = visibleCards();
+      const selected = visible.find((card) => card.cluster_id === selectedCluster) || visible[0];
+      const max = Math.max(1, ...visible.flatMap((card) => [card.pilot_rate, card.holdout_rate]));
+      const filters = [
+        filterButton("risk-filter", "all", riskFilter, `Все ${state.cards.length}`),
+        filterButton("risk-filter", "HOLD", riskFilter, "HOLD"),
+        filterButton("risk-filter", "REVIEW", riskFilter, "REVIEW"),
+        filterButton("risk-filter", "BACKLOG", riskFilter, "BACKLOG"),
+      ].join("");
+      const bars = visible.map((card) => `<div class="bar-row">
+        <div>${esc(card.cluster_id)}</div>
+        <div>
+          <div class="track"><div class="fill pilot" style="width:${(card.pilot_rate / max) * 100}%"></div></div>
+          <div class="track"><div class="fill holdout" style="width:${(card.holdout_rate / max) * 100}%"></div></div>
+        </div>
+        <div class="bar-value">${ratio(card.pilot_rate)} / ${ratio(card.holdout_rate)}</div>
+      </div>`).join("");
+      const tone = { HOLD: "danger", REVIEW: "warn", BACKLOG: "" };
+      const rows = visible.map((card) => `<tr class="${tone[card.recommendation] || ""}">
+        <td>${esc(card.cluster_id)}</td><td>${esc(card.label)}</td><td>${esc(card.severity)}</td>
+        <td class="num">${ratio(card.pilot_rate)}</td><td class="num">${ratio(card.holdout_rate)}</td>
+        <td class="num">${ratio(card.rate_ratio)}</td><td>${esc(card.recommendation)}</td>
+      </tr>`).join("");
+      const options = visible.map((card) =>
+        `<option value="${esc(card.cluster_id)}" ${card.cluster_id === selected.cluster_id ? "selected" : ""}>${esc(card.cluster_id)} · ${esc(card.label)} · ${esc(card.recommendation)}</option>`
+      ).join("");
+      return `<div class="stack">
+        <h2>Частота сообщений на 1 000 устройств</h2>
+        <p class="small">Ось категорий — кластер. Длина полосы — сообщений на 1 000 устройств. Пилот: ${devices(state.meta.pilot_devices)} устройств сборки ${esc(state.meta.pilot_build)}. Holdout: ${devices(state.meta.holdout_devices)} устройств сборки ${esc(state.meta.holdout_build)}. Частота = 1 000 × число сообщений / размер когорты.</p>
+        <div class="row">${filters}</div>
+        <div class="legend"><span><i class="swatch pilot"></i>Пилот</span><span><i class="swatch holdout"></i>Holdout</span></div>
+        <div>${bars}</div>
+        <p class="small">Источник: risk.py, синтетическая выборка. Сравнение когорт не является причинным выводом.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Кластер</th><th>Тема</th><th>Severity</th><th class="num">Пилот / 1 000</th><th class="num">Holdout / 1 000</th><th class="num">Отношение</th><th>Решение</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <label for="risk-select">Карточка</label>
+        <select id="risk-select">${options}</select>
+        <article class="panel stack">
+          <div class="split"><h3>${esc(selected.cluster_id)} · ${esc(selected.label)}</h3><span class="small">${esc(selected.recommendation)}</span></div>
+          <p>${esc(selected.rationale)}</p>
+          <p class="muted">Пилот ${selected.pilot_count} из ${devices(state.meta.pilot_devices)}, ${ratio(selected.pilot_rate)} на 1 000. Holdout ${selected.holdout_count} из ${devices(state.meta.holdout_devices)}, ${ratio(selected.holdout_rate)} на 1 000. Отношение ${ratio(selected.rate_ratio)}.</p>
+        </article>
+      </div>`;
+    }
+
+    function viewGate() {
+      const pending = state.gate.pending_safety;
+      const rows = state.items.filter((item) => item.safety_flag).map((item) => `<tr class="${item.review ? "ok" : "danger"}">
+        <td>${esc(item.record_id)}</td>
+        <td>${esc(item.cluster_id)}</td>
+        <td>${item.review ? esc(ACTION_LABEL[item.review.action]) : "ожидает"}</td>
+        <td>${esc(item.text)}</td>
+      </tr>`).join("");
+      const block = pending.length
+        ? `<div class="banner warn"><strong>Expand заблокирован</strong><span>Без действия человека: ${esc(pending.join(", "))}. Достаточно принять, исправить, разделить или оставить без вердикта.</span></div>`
+        : `<div class="banner info"><strong>Очередь safety разобрана</strong><span>Expand можно подписать. Рекомендация модели остаётся ${esc(state.gate.recommendation)}.</span></div>`;
+      const signed = state.gate.decision
+        ? `<div class="banner ${state.gate.decision === "Expand" ? "ok" : "warn"}"><strong>Подписано: ${esc(state.gate.decision)}</strong><span>${esc(state.gate.signer)}. ${esc(state.gate.note || "Основание не записано.")} Модель по-прежнему рекомендует ${esc(state.gate.recommendation)}.</span></div>`
+        : "";
+      const clear = state.gate.decision ? `<button type="button" class="ghost" data-action="clear-signature">Снять подпись</button>` : "";
+      return `<div class="stack">
+        <h2>Подпись решения</h2>
+        <div class="banner danger"><strong>Модель рекомендует ${esc(state.gate.recommendation)}</strong><span>Рекомендация advisory. Safety-отчёт без действия человека блокирует Expand. Hold и Rollback можно подписать и до завершения очереди.</span></div>
+        ${block}
+        <div class="table-wrap"><table>
+          <thead><tr><th>Сообщение</th><th>Кластер</th><th>Действие</th><th>Текст</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <div class="field"><label for="signer">Подписант</label><input id="signer" value="${esc(draftSigner)}" placeholder="Имя и роль"></div>
+        <textarea id="gate-note" placeholder="Основание подписи">${esc(draftGateNote)}</textarea>
+        <div class="row">
+          <button type="button" class="primary" data-action="sign" data-decision="Hold">Подписать Hold</button>
+          <button type="button" data-action="sign" data-decision="Rollback">Подписать Rollback</button>
+          <button type="button" data-action="sign" data-decision="Expand">Подписать Expand</button>
+          ${clear}
+        </div>
+        ${signed}
+      </div>`;
+    }
+
+    function viewDmv() {
+      if (dmvLoading) {
+        return `<h2>California DMV, 2023</h2><p class="muted">Считаю отчёты о disengagement.</p>`;
+      }
+      if (dmvError) {
+        return `<div class="banner warn"><strong>Корпус не прочитан</strong><span>${esc(dmvError)}</span></div>`;
+      }
+      const data = dmvState;
+      const topics = data.topics.map((item) => `${esc(item.topic)} ${devices(item.reports)}`).join(" · ");
+      const rows = data.clusters.map((cluster) => `<tr class="${cluster.safety ? "danger" : cluster.abstain ? "warn" : ""}">
+        <td class="num">${devices(cluster.reports)}</td>
+        <td class="num">${cluster.forms}</td>
+        <td>${cluster.abstain ? "не уверена" : esc(cluster.topic)}</td>
+        <td>${esc(cluster.severity)}</td>
+        <td>${cluster.safety ? "да" : "нет"}</td>
+        <td>${esc(cluster.manufacturer)}</td>
+        <td>${esc(cluster.text)}</td>
+      </tr>`).join("");
+      return `<div class="stack">
+        <h2>Disengagement reports, 2023</h2>
+        <div class="banner ${data.operating_point.target_met ? "ok" : "warn"}">
+          <strong>Порог precision 0.90 при coverage 60% ${data.operating_point.target_met ? "достигнут" : "не достигнут"}</strong>
+          <span>Лучшая точка keyword baseline: precision ${data.operating_point.best_precision}, recall ${data.operating_point.best_recall}, F1 ${data.operating_point.best_f1}. Доля потока, которую можно снять с проверки без единого пропущенного safety, — ${Math.round(data.operating_point.clear_without_miss_coverage * 100)}% при confidence от ${data.operating_point.clear_without_miss_confidence}.</span>
+        </div>
+        <div class="banner info">
+          <strong>${esc(data.source)}</strong>
+          <span>${devices(data.reports)} отчётов, ${devices(data.distinct_texts)} разных формулировок. Keyword baseline не уверен в ${devices(data.abstain_reports)} отчётах. Safety-флаг стоит на ${devices(data.safety_reports)}. Сравнение pilot/holdout к этому корпусу не применяется.</span>
+        </div>
+        <p class="small">Темы по числу отчётов, одна формулировка может попасть в несколько: ${topics}. Источник: <a href="${esc(data.url)}">${esc(data.url)}</a></p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="num">Отчёты</th><th class="num">Формы</th><th>Тема</th><th>Severity</th><th>Safety</th><th>Производитель</th><th>Доминирующая формулировка</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <p class="small">Кластер склеивает формулировки с Jaccard от 0.34. Общий канцелярский хвост может соединить разные причины. Тема и safety в строке относятся к самой частой формулировке кластера.</p>
+      </div>`;
+    }
+
+    const CAUSE_LABEL = {
+      prediction: "Прогноз поведения",
+      perception: "Восприятие",
+      planning: "Планирование",
+      localization: "Карта и локализация",
+      hardware: "Железо",
+      platform: "Платформа и софт",
+      controls: "Скорость и руль",
+      conflict: "Конфликт с участником",
+      conditions: "Условия и ODD",
+      unknown: "Причина не названа",
+    };
+
+    function viewAnnotate() {
+      if (!annotateState) {
+        return `<h2>Вторая разметка</h2><p class="muted">Загружаю формулировку.</p>`;
+      }
+      const progress = annotateState.progress;
+      const kappa = annotateState.kappa;
+      const kappaLine = kappa
+        ? `Cohen’s kappa на ${kappa.n} формулировках: safety ${kappa.safety}, severity ${kappa.severity}, cause ${kappa.cause}. Порог severity для Gate 4 — 0.70.`
+        : "Kappa появится после двух сохранённых формулировок.";
+      const disagreementRows = (annotateState.disagreements || []).map((row) => `<tr>
+        <td class="num">${devices(row.reports)}</td>
+        <td>${esc(row.first.cause)} / ${esc(row.first.severity)} / ${row.first.safety ? "да" : "нет"}</td>
+        <td>${esc(row.second.cause)} / ${esc(row.second.severity)} / ${row.second.safety ? "да" : "нет"}</td>
+        <td>${esc(row.text)}</td>
+      </tr>`).join("");
+      const disagreementTable = disagreementRows
+        ? `<h2>Расхождения</h2><div class="table-wrap"><table><thead><tr><th class="num">Отчёты</th><th>Первый проход</th><th>Второй проход</th><th>Текст</th></tr></thead><tbody>${disagreementRows}</tbody></table></div>`
+        : "";
+      if (!annotateState.item) {
+        return `<div class="stack"><h2>Вторая разметка</h2><div class="banner ok"><strong>Все ${progress.total} формулировок размечены</strong><span>${kappaLine}</span></div>${disagreementTable}</div>`;
+      }
+      const item = annotateState.item;
+      const causes = [`<option value="">Выбери причину</option>`].concat(annotateState.causes.map((cause) => `<option value="${esc(cause)}">${esc(CAUSE_LABEL[cause] || cause)}</option>`)).join("");
+      const severities = [`<option value="">Выбери тяжесть</option>`].concat(annotateState.severities.map((severity) => `<option value="${esc(severity)}">${esc(severity)}</option>`)).join("");
+      return `<div class="stack">
+        <h2>Вторая разметка</h2>
+        <p class="small">${progress.labeled} из ${progress.total} формулировок. Покрыто ${devices(progress.reports_labeled)} из ${devices(progress.reports_total)} отчётов. ${kappaLine}</p>
+        <article class="panel stack">
+          <p class="small">${esc(item.manufacturer)} · ${devices(item.reports)} отчётов</p>
+          <p>${esc(item.text)}</p>
+          <div class="field"><label for="cause-select">Причина</label><select id="cause-select">${causes}</select></div>
+          <div class="field"><label for="severity-select">Тяжесть</label><select id="severity-select">${severities}</select></div>
+          <div class="field"><label for="safety-select">Блокирует выпуск</label><select id="safety-select"><option value="false">Нет</option><option value="true">Да</option></select></div>
+          <div class="row"><button type="button" class="primary" data-action="annotate-save">Сохранить и далее</button></div>
+        </article>
+        <p class="small">Safety — да, только если в тексте человек, животное, контакт, съезд с дороги или прямой отказ уступить. Precautionary takeover — нет.</p>
+      </div>`;
+    }
+
+    async function loadAnnotate() {
+      current = "annotate";
+      if (state) render();
+      try {
+        const response = await fetch("/api/annotate");
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Не удалось открыть разметку.");
+        annotateState = payload;
+      } catch (error) {
+        setStatus(error.message, true);
+      }
+      if (current === "annotate" && state) render();
+    }
+
+    async function loadDmv() {
+      current = "dmv";
+      if (dmvState || dmvError) {
+        render();
+        return;
+      }
+      dmvLoading = true;
+      render();
+      try {
+        const response = await fetch("/api/dmv");
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Не удалось прочитать корпус DMV.");
+        dmvState = payload;
+      } catch (error) {
+        dmvError = error.message;
+      } finally {
+        dmvLoading = false;
+        if (current === "dmv") render();
+      }
+    }
+
+    async function onClick(event) {
+      const screenButton = event.target.closest("[data-screen]");
+      if (screenButton) {
+        if (screenButton.dataset.screen === "dmv") {
+          loadDmv();
+          return;
+        }
+        if (screenButton.dataset.screen === "annotate") {
+          loadAnnotate();
+          return;
+        }
+        current = screenButton.dataset.screen;
+        render();
+        return;
+      }
+      const control = event.target.closest("[data-action]");
+      if (!control || !state || busy) return;
+      const action = control.dataset.action;
+      if (action === "triage-filter") {
+        triageFilter = control.dataset.filter;
+        render();
+        return;
+      }
+      if (action === "risk-filter") {
+        riskFilter = control.dataset.filter;
+        render();
+        return;
+      }
+      if (action === "triage-safety") {
+        triageFilter = "safety";
+        current = "triage";
+        const pending = state.gate.pending_safety[0];
+        if (pending) {
+          selectedRecord = pending;
+          draftReviewNote = state.items.find((row) => row.record_id === pending)?.review?.note ?? "";
+        }
+        render();
+        return;
+      }
+      if (action === "open-gate") {
+        current = "gate";
+        render();
+        return;
+      }
+      if (action === "open-record") {
+        selectedRecord = control.dataset.record;
+        triageFilter = "all";
+        current = "triage";
+        draftReviewNote = state.items.find((row) => row.record_id === selectedRecord)?.review?.note ?? "";
+        render();
+        return;
+      }
+      busy = true;
+      try {
+        if (action === "review") {
+          draftReviewNote = document.querySelector("#review-note")?.value ?? draftReviewNote;
+          const payload = await post("/api/reviews", {
+            record_id: selectedRecord,
+            action: control.dataset.review,
+            note: draftReviewNote,
+          });
+          applyPayload(payload);
+          setStatus(`${selectedRecord}: ${ACTION_LABEL[control.dataset.review]}.`);
+          return;
+        }
+        if (action === "sign") {
+          draftSigner = document.querySelector("#signer")?.value ?? draftSigner;
+          draftGateNote = document.querySelector("#gate-note")?.value ?? draftGateNote;
+          if (!draftSigner.trim()) {
+            setStatus("Укажите подписанта.", true);
+            return;
+          }
+          const payload = await post("/api/gate", {
+            decision: control.dataset.decision,
+            signer: draftSigner,
+            note: draftGateNote,
+          });
+          draftSigner = payload.gate.signer;
+          draftGateNote = payload.gate.note;
+          applyPayload(payload);
+          setStatus(`Подписано: ${payload.gate.decision}.`);
+          return;
+        }
+        if (action === "clear-signature") {
+          applyPayload(await post("/api/gate/clear", {}));
+          setStatus("Подпись снята.");
+          return;
+        }
+        if (action === "annotate-save") {
+          const cause = document.querySelector("#cause-select").value;
+          const severity = document.querySelector("#severity-select").value;
+          if (!cause || !severity) {
+            setStatus("Выбери причину и тяжесть.", true);
+            return;
+          }
+          const payload = await post("/api/annotate", {
+            id: annotateState.item.id,
+            cause,
+            severity,
+            safety: document.querySelector("#safety-select").value === "true",
+          });
+          annotateState = payload;
+          render();
+          const kappa = payload.kappa;
+          setStatus(kappa ? `Сохранено. Kappa severity ${kappa.severity}.` : "Сохранено.");
+          return;
+        }
+        if (action === "reset") {
+          const payload = await post("/api/reset", {});
+          draftReviewNote = "";
+          draftSigner = "";
+          draftGateNote = "";
+          applyPayload(payload);
+          setStatus("Разбор сброшен.");
+        }
+      } catch (error) {
+        setStatus(error.message, true);
+      } finally {
+        busy = false;
+      }
+    }
+
+    document.addEventListener("click", onClick);
+    document.addEventListener("change", (event) => {
+      if (event.target.id === "record-select") {
+        selectedRecord = event.target.value;
+        draftReviewNote = state.items.find((row) => row.record_id === selectedRecord)?.review?.note ?? "";
+        render();
+      }
+      if (event.target.id === "cluster-select" || event.target.id === "risk-select") {
+        selectedCluster = event.target.value;
+        render();
+      }
+    });
+    document.addEventListener("input", (event) => {
+      if (event.target.id === "review-note") draftReviewNote = event.target.value;
+      if (event.target.id === "signer") {
+        draftSigner = event.target.value;
+        refreshGateButtons();
+      }
+      if (event.target.id === "gate-note") draftGateNote = event.target.value;
+    });
+
+    fetch("/api/readout")
+      .then((response) => {
+        if (!response.ok) throw new Error("Не удалось загрузить прогон.");
+        return response.json();
+      })
+      .then((payload) => {
+        draftSigner = payload.gate.signer || "";
+        draftGateNote = payload.gate.note || "";
+        applyPayload(payload);
+      })
+      .catch((error) => setStatus(error.message, true));
+  </script>
+</body>
+</html>

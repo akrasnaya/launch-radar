@@ -1,0 +1,305 @@
+id,cause,severity,safety,text
+020c54591a9d4bc6,planning,medium,false,Driver disengaged with steering input. Driver took over because ego vehicle suddenly made an inappropriate lane change to a lane we did not need to be in.
+030b284f02e228c2,perception,high,false,"Safety Driver disengaged autonomous mode upon judging that vehicle was too close to road/lane boundary. Root cause: object, lane detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+040ad8b1402b7ebb,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for a failure to lane change.
+045bd09119c42320,perception,medium,false,"System software failure in the perception module while proceeding straight with medium traffic on highway, in cloudy weather."
+049b450a7b1c344f,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately yield to adjacent vehicle while merging
+04d639c4b8fdca2e,platform,low,false,Fusion Traffic Regulation module timeout.
+04f2124c46d6a0a7,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle was slowing down too much to find a lane change gap.
+05418b2cf5561df7,conflict,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over to yield to pedestrians at a crosswalk and give more space.
+0549e4f7e5840874,localization,medium,false,A discrepancy in the onboard map resulted in a motion plan requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle.
+057cdda068ec530e,planning,medium,false,"Safety Driver disengaged autonomous mode as a precaution for keeping distance from vehicle parked on side. Root cause: precaution. Conditions: Non-inclement weather, dry roads, no other factors involved."
+05849a821057e3c2,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because of braking behavior immediately after engaging.
+06842d3a5be0f29d,perception,medium,false,System software failure in the perception module while proceeding straight with low traffic on highway in cloudy weather.
+06bc4d4e00281a1b,localization,medium,false,Driver disengaged with steering input. Driver took over for unexpected swerving due to temporary delocalization.
+075449abe12cc33a,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected braking during left turn.
+077de3b8d0cf8760,controls,medium,false,"The autonomous system perceives and understands the environment by processing raw camera and radar inputs, detecting surfaces and objects in a scene, and calculating distance, velocity and motion vector for every pixel. Ghost AV Test Drivers are trained to disengage proactively. The AV Test Driver took control of the vehicle in response to unexpected braking or the system braking with too much or too little force in the particular driving environment."
+07b1be53e0dd2b86,perception,medium,false,Front centre wide angle camera is blocked.
+07fb5e3491215481,perception,medium,false,"Safety Driver disengaged autonomous mode to ensure no stopping at traffic light or stop line. Root cause: inaccurate traffic light or stop line detection. Conditions: Non-inclement weather, dry roads, no other factors involved."
+091caa4618808056,planning,medium,false,Planning Logic: Inccorect planner trajectory fails to adequate yield to lead vehicle
+0abac0d484834e6a,perception,medium,false,Inaccurate lane-keeping due to incorrectly perceived element in the surrounding environment of the vehicle
+0b0af45e32d70be7,perception,low,false,Unknown error that caused the system to disengage: [29.14]Pedestrian detection MRCFR2 state timeout
+0b9e7079d71737d2,perception,medium,false,System software failure in the perception module while proceeding straight at low speed with heavy traffic on highway in cloudy weather.
+0c1373342482ffec,perception,high,false,"Safety Driver disengaged autonomous mode due to issue with lane change maneuver because of insufficient distance keeping from other vehicles. Root cause: object detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+0cfe41750852610f,platform,low,false,Planning behavior provider module timeout.
+0d7aac738b5a018d,perception,medium,false,"Safety Driver disengaged due to inappropriate braking, caused by perception issue."
+0dd5484fdaa98438,conflict,high,true,Object Perception: Incorrect perception of traffic light leads to inadequate yield to cross traffic
+0e70fca3f79ad780,conflict,critical,true,Planning Logic: Incorrect prediction leads to inadequate yield to cyclist running stop sign
+0ef54731e2cf47e1,hardware,low,false,"The AV system exited autonomous mode due to hardware irregularity. While the car crossed a bumpy intersection, the AV system detected abnormal car status data, causing it to exit autonomous mode."
+125c64d42773549f,planning,medium,false,Safety Driver disengaged due to issue with lane change maneuver.
+12624cff55ff61d5,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over of unexpected braking during lane split into turn lane.
+12a475c6d039ae74,platform,low,false,Precautionary Takeover: Disengaged due to a vehicle platform software issue pertinent to the compute infrastructure sub-system
+12b7b6ce9cafae70,conditions,medium,false,"Weather(Sunny), Daylight: Safety Decision - Car coming to close to AV, from the adjacent lane (Safety Takeover)"
+1384abf462ccd106,platform,low,false,Planning behavior updater module state error.
+13a45d8b4cfa1b4d,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle was getting stuck looking for a lane change gap.
+14da9ac8c80fa8cb,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to unexpected short green light cycle.
+1587ebbb6077b76e,conflict,critical,true,"Weather(Sunny), Daylight: Safety Decision - Pedestrian on the road, on a defined crosswalk (Safety takeover)"
+15e6253e462759c7,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because adjacent vehicle was merging unsafely into our lane.
+161e2da818b2f820,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected braking on highway.
+164d6f6e671b5543,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unstable acceleration profile over train tracks.
+166be4c57c57fd48,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for braking and rough trajectory during lane change.
+173a065e89f760ea,conflict,high,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected frequent braking approaching cyclist.
+173dd40f6c633c9e,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because of unstable planned trajectory availability.
+1846922644b2b4bc,unknown,medium,false,The AV Test Driver took control after engaging the autonomous system due to immediate unexpected behavior of the system. The AV Safety Drivers are trained to take control proactively should the system not operate as expected.
+18655264856413b3,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over in response to sudden braking in dense traffic.
+1c047d7c25fb09bb,platform,low,false,Fusion Dynamic World module timeout.
+1c5417be7bb680df,planning,medium,false,System planned inaccurate trajectory to overtake a static object that was partialy blocking the lane
+1d265ccd5ac10cbd,perception,high,false,"Safety Driver disengaged autonomous mode due to issue with catching up maneuver because of insufficient distance keeping from other vehicles. Root cause: object detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+1daf4e86f9868c1f,perception,medium,false,System software failure in the perception module while proceeding straight with medium traffic on highway in clear weather.
+1e2c292f29eddde0,perception,medium,false,Object Perception: Incorrect perception of debris in road leads to unwanted braking with tailgating agent
+214ab85f731fc75d,controls,medium,false,Driver disengaged with steering input. Driver took over for unstable braking and swerving around articulated bus.
+216c224b2f66b17e,prediction,medium,false,Planning Logic: Incorrect prediction leads to unwanted braking with tailgating agent
+21ad2d0752396eb4,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to ego vehicle initiating a lane change slowly approaching an intersection.
+2203ca55a7dd4817,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to unexpected braking in intersection.
+24e1b3ee5d6cb6b4,controls,medium,false,Safety Driver disengaged due to inappropriate braking proposal.
+256c5d39f07603e9,localization,high,false,"The Safety driver noticed incorrect map drive lines, causing the AV to drive too close to the edge of the lane marking. As a result, Driver safely disengaged and resumed manual control."
+265b60a4cd3dd9b3,localization,critical,true,Localization: Poor localization led to driving onto curb
+265cc86ce0886b2b,localization,medium,false,Maps incident detected.
+280f8f8d9e88ca37,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to unstable speed profile while trying to find lane change gap.
+28473e2660375b06,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for braking and slow driving through right turn.
+2b79b9e2937a52ab,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately yield to adjacent vehicle while merging due to construction
+2bdca9c8784887cf,perception,medium,false,Safety Driver disengaged because vehicle was mishandling a traffic light.
+2d998b1bf12b8b01,planning,high,false,"The AV Test Driver took control from the autonomous system due to undesirable lane placement. AV Test Drivers consider various factors, including the amount of traffic and the behavior of any surrounding vehicles. In addition to their own perception, an in-vehicle display provides input on the vehicle's lane placement. Also incorporated is an advanced system for fluid exchange between the driver and the system without the need for buttons or switches. This allows the AV Test Drivers to take control to provide a transitory adjustment. In this case, the AV Test Driver took control from the autonomous system when the vehicle made contact with a lane marker."
+2ec2974060e3cadb,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately yield to turning cross traffic agent
+3006b7cba9cd4250,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to fallback trajectory error.
+30da6729ef2cd69d,conditions,medium,false,"The AV stopped for a construction zone due to lane blockage. As a result, Driver safely disengaged and resumed manual control."
+32f2fabbacc81e8b,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for a failure to yield to pedestrian at a crosswalk.
+352e5f943ecbecd0,perception,medium,false,"The system incorrectly perceived an element in the surrounding environment, resulting in an incorrect motion plan requiring a disengagement"
+36f1c7251e6c99f8,hardware,low,false,Driver disengagement due to safety monitor notification of sensor input delay
+36fa83bc87805a8c,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to sudden braking after a left turn.
+370dc81fb4df21f0,platform,low,false,Fusion Grid World module state error.
+3a1b36bb9760ac5b,conflict,critical,true,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for improper yielding to a pedestrian near the roadway.
+3b53ee54ba17c71d,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because other car cut into our lane during a left turn.
+3b9d6b93f0164e2d,hardware,low,false,"Manual disengagement as the AV had hardware irregularity. The HMI (human machine interface) of the AV system demonstrated abnormal behavior, causing the safety operator manually disengaged the AV."
+3bab07a73e1b11b8,planning,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for failure to slow appropriately during lane change approaching a red light.
+3c250823b27b80dc,controls,medium,false,Router: Incorrect router transition leads to unwanted braking with tailgating agent
+3ca2d882ea7de682,controls,medium,false,Driver disengaged with steering input. Driver took over because vehicle failed to slow and yield at a required yield.
+3cae6d415100e675,platform,low,false,Precautionary Takeover: Disengaged due to a vehicle platform software issue within the Autonomous Vehicle's (AV) controller interface sub-system
+3d8b7060a0314eee,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle was proceeding slowly through a left turn.
+3d8f3600765f71fd,prediction,medium,false,Prediction discrepancy. Late and illegal cut-in from other vehicle from adjacent lane.
+3d91625fcf78fedc,platform,low,false,The system disengaged because the driver seat belt not being properly fastened.
+3dacbae2eb730554,planning,medium,false,A system software failure in the planner module while approaching an intersection on surface street in cloudy weather.
+3e6d336733419843,conflict,critical,true,"Weather(Sunny), Daylight: Safety Decision - Car Crash in front of the Vehicle in its lane, (safety takeover)"
+3ef7eec87e0e5300,planning,medium,false,Driver disengagement due to safety monitor notification of planning discrepancy in the determination of vehicle trajectory
+3f7c93f3cf124863,conflict,critical,true,Planning Logic: Incorrect planner trajectory fails to adequately yield to pedestrian on scooter in bike lane
+3fa3408cf2277c95,localization,medium,false,Localization Takeover: Disengaged due to a temporary localization sub-system drop
+4153cd9e5f613768,conflict,critical,true,Planning Logic: Incorrect prediction leads to inadequate yield to pedestrian in crosswalk
+42ccc05b62408d47,perception,medium,false,"Weather(Sunny), Daylight: Perception issue - Green light not detected after switch from red, car stood still, camera perception issue"
+42ee2d258a0aeb32,perception,medium,false,Disengagement for a missed detection by a component of perception system of the lead vehicle (trailer truck).
+441a112a54878bb3,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to other vehicle driving the wrong way in our lane.
+444b5ddd2f26603b,conflict,critical,true,Driver disengaged with steering input. Driver took over due to improper yielding to a pedestrian near roadway during left turn.
+459cd66e02e772cb,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for ego vehicle approaching too quickly to a right turn with pedestrians in crosswalk.
+45a933aeae500b34,conflict,high,true,Planning Logic: Planner trajectory inadequately yields for oncoming vehicle
+4614e94c373aaa26,perception,medium,false,System software failure in the perception module while proceeding straight at low speed with medium traffic on highway in clear weather.
+4625e540d1632f3d,planning,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for inappropriate lane change planned too close to lead vehicle and too close to intersection.
+463353e0954ed248,perception,medium,false,System software failure in the perception module while proceeding straight with no traffic on highway in clear weather.
+46358e52e313c484,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for slow approach to highway onramp with tailgating vehicle behind us.
+46aafbabdb96f482,platform,low,false,Disengage for a software discrepancy for which our vehicle's diagnostics received a message indicating a potential performance issue with a software component
+4722677a81615838,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to overly cautious braking approaching lane merge.
+476b8458136d3873,controls,medium,false,Driver disengaged with steering input. Driver took over for wobbly pathing while driving straight in-lane.
+47eb9728ad88d942,perception,medium,false,System software failure in the perception module while proceeding straight with low traffic on highway in clear weather.
+49007d079a5999f3,perception,high,false,"Safety Driver disengaged autonomous mode due to issue with cut in maneuver because of insufficient distance keeping from other vehicles. Root cause: object detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+4a6b6004eac55638,perception,medium,false,Disengage for a perception discrepancy for which a component of the vehicle's perception system failed to detect an object correctly
+4bef3af0c6841271,platform,low,false,Planning behavior provider module state error.
+4cf128f47def4ac4,perception,medium,false,"The test vehicle sensor field of view was obstructed, preventing the adequate perception of the surrounding environment and requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle."
+4ddbf3d837fc2197,planning,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because ego vehicle was approaching red light too fast after completing a lane change.
+4e72f6bc02804008,perception,medium,false,Perception Discrepancy: Disengaged for lack of consistently accurate traffic light state detection
+4ed14108a1b686b6,prediction,medium,false,"The ADS incorrectly predicted the behavior of another road user, which resulted in a motion plan requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle."
+4ee79cfdd16e9cc9,conflict,critical,true,Planning Logic: Incorrect prediction leads to inadequate yield to cyclist in crosswalk
+4f86c186788e8e67,planning,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because ego vehicle was not leaving sufficient space around other car during lane change.
+5064400250f6e8db,perception,medium,false,Inaccurate lane-keeping due to object detection discrepancy
+5185d12354d8e21d,conflict,critical,true,"Weather(Sunny), Daylight: Safety Decision - Pedestrian on the road, not on a defined crosswalk (Safety takeover)"
+51a35e709b70ee81,perception,high,false,"Safety Driver disengaged autonomous mode due to issue with the SW unable to perform the lane change manuever safely. Root cause: lane detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+51e0c2ee64d3cdb5,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for late braking for a yellow light.
+52604d5fe86989d6,unknown,low,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over accidentally.
+52648f3770edbde5,conflict,critical,true,"While traveling on a narrow road, an incoming vehicle approached from the front traveling towards the AV. Since this is a safety critical situation, the operatpr took over."
+5298dfb220f5acb6,conflict,high,false,Safety Driver disengaged near crosswalk due to overly conservative vehicle behavior.
+53895645835e4c94,controls,high,false,Driver disengaged with steering input. Driver took over for other vehicle encroaching in our lane.
+54a4bf68662beac3,planning,medium,false,System software failure in the planning module when making a left turn at an intersection in clear weather.
+55575b95d69936c8,platform,low,false,"Safety Driver disengaged autonomous mode due to issue with the SW giving back control to the driver because of a minor system error. Root cause: SW self diagnosed something to be not most ideal. Conditions: Non-inclement weather, dry roads, no other factors involved."
+557ef1a2d7ef3541,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected swerving and braking on highway offramp.
+5652c839122856bb,planning,medium,false,"System planned inaccurate trajectory to overtake another vehicle, due to inaccurate path planning"
+570a350a291d053b,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for vehicle cutting in.
+57b2ce3fca8f6e4e,planning,high,false,Planning Discrepancy: Disengaged due to planning trajectory scoring issue leading to insufficient braking for actor vehicle in front of the Autonomous Vehicle (AV)
+57dc271197142942,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle was stuck at green light.
+5838bab0cf1762d6,conflict,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for animal in the roadway.
+59408cc8861c7cc0,planning,medium,false,Driver disengaged with steering input. Driver took over for improper lane change attempt without appropriate space.
+5a02e8d2e7e88ad1,perception,medium,false,Object Perception: Incorrect perception of false object in road leads to unwanted braking with tailgating agent
+5a9122317ab80148,perception,medium,false,Perception Discrepancy: Disengaged due to inconsistent traffic light state detection
+5b34aebca45d13da,perception,medium,false,Object Perception: Incorrect perception of bus leads to nudging into adjacent lane with tailgating agent
+5d451bce4b0dac92,planning,high,false,Safety Driver disengaged upon judging that vehicle was too close to road boundary.
+5efb6e097bba4e9e,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to inappropriate slowdown after lane change approaching green light.
+5f23b9f88b334727,perception,high,false,"Safety Driver disengaged autonomous mode due to issue with exit/merge maneuver because of insufficient distance keeping from other vehicles. Root cause: object detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+5f4c138a18e524ff,perception,medium,false,"Safety Driver disengaged autonomous mode due to inappropriate braking, caused by falsely percepted stop line issue. Root cause: object detection issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+612a255eecfc0f2e,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to failure to yield to pedestrian at crosswalk.
+615e0555c5670e42,planning,medium,false,"Safety Driver disengaged autonomous mode to perform a steering maneuver to correct the trajectory of the vehicle. Root cause: trajectory calculation issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+622b86c0516b5367,localization,medium,false,Driver disengaged with steering input. Driver took over for drifting behavior due to poor localization.
+62dd06094941dd8c,unknown,low,false,Driver disengagement to perform manual lane change
+64983149213dbd20,perception,medium,false,System software failure in the perception module while entering a cloverleaf ramp on the highway in clear weather.
+65a12989bafc9ecb,localization,medium,false,Localization module detected a localizer incident.
+65ad780d60105dab,platform,low,false,Recording module incident detected.
+671e97db6d7b7b45,conflict,high,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to failure to yield to oncoming vehicle during unprotected left turn.
+682d90e7da393d5e,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately slow for lead vehicle
+68903be15aa025f2,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because ego vehicle chose improper position to yield for pedestrian in crosswalk.
+68dd95d50c6bb53f,planning,high,false,Safety Driver disengaged upon judging that vehicle was too close to other road user or obstacle.
+69211a8ddbe4a505,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for sudden braking after a lane change.
+69e46349d736d3d0,conflict,high,true,Planning Logic: Incorrect planner trajectory fails to yield for cross traffic
+6b609af75e1743b0,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle got stuck at stop sign.
+6bcb3ecbfc468a6e,conflict,high,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for a failure to yield to a car turning left at a 4-way stop.
+6cb6fea6aff5ddee,perception,medium,false,Fusion Dynamic World reported a Sensor Fusion relevant incident.
+6d256d05a65d7906,unknown,medium,false,Disengage for unwanted maneuver of the vehicle that was undesirable under the circumstances
+6e22a5017f78402f,conflict,high,false,"The AV wasn't yielding enough to a vehicle merging and allowing enough gap for a confortable merge. As a result, Driver safely disengaged and resumed manual control."
+6eb5d9232acfe121,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for inappropriate braking on highway.
+707a223b3e924fb6,planning,medium,false,"The ADS developed a motion plan to remain stationary, requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle."
+710c83e99024820b,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for overly cautious braking approaching a lane merge.
+732744b4ec701946,conditions,medium,false,"Safety Driver disengaged autonomous mode due derbis on the road. Root cause: precaution. Conditions: Non-inclement weather, dry roads, no other factors involved."
+75fd373dd35bf5d8,perception,medium,false,System software failure in the perception module while proceeding straight with medium traffic on highway in cloudy weather.
+7636440ec2354b4b,planning,medium,false,Planning Logic: Incorrect behavior leads to unwanted braking with cross traffic
+7655142bf525bf0b,conflict,high,false,"Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for other vehicle merging onto highway did not yield to us, disengaged to make space."
+76ae264f8ae0e25d,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver braking for a late reaction to a yellow light.
+76b7f93ef0d55558,platform,low,false,Driver disengagement due to safety monitor notification of buffer congestion
+774c18138b2f22ee,hardware,medium,false,Vision lost connection to camera.
+794564242466613c,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for improper yellow light handling.
+79af7f6359b050f8,prediction,medium,false,Prediction Discrepancy: Disengaged due to inconsistent prediction trajectory for a bus merging in front of the Autonomous Vehicle (AV) vehicle
+7b7c594b42aa944e,conflict,high,true,Planning Logic: Planner trajectory inadequately yields for vehicle reversing from driveway
+7bafe83fe08ce192,planning,medium,false,"The ADS incorrectly detected the state of a traffic signal, which resulted in a motion plan requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle."
+7c1b9716bebf326d,perception,high,false,"Safety Driver disengaged autonomous mode upon judging that vehicle was too close to road/lane boundary during an exit/merge manuever. Root cause: lane detection or other issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+7caffec85f00bb82,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately yield to adjacent vehicle overtaking Nuro vehicle while merging
+7ffdced4e8686bb3,conflict,high,true,Planning Logic: Planner trajectory inadequately yields for oncoming while making a left turn
+812a117435d57599,conflict,high,true,Planning Logic: Planner trajectory inadequately yields for cross traffic
+82ba671de9aecbfc,controls,medium,false,"Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for improper braking during left turn, improper yielding to adjacent vehicle making right turn."
+82c9c9e73f87806a,prediction,medium,false,Prediction Discrepancy: Disengaged due to inaccurate oncoming traffic predictions as the Autonomous Vehicle (AV) is turning left at an intersection
+834ff7d75a54ed57,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequately yield to lead vehicle
+8418a2d7b25468cb,controls,medium,false,Safety Driver disengaged to reduce speed.
+843f0ea592843b50,conflict,high,true,Safety Driver disengaged due to vehicle not giving enough space for cross traffic.
+8589a959bc887f70,conflict,critical,true,Manual disengagement after a scooter made contact with the AV.
+871001b93138d15b,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for a slow approach into a highway onramp with a vehicle approaching quickly behind us.
+87f30a47e94ed46d,planning,medium,false,Inaccurate lane-keeping due to inaccurate path planning
+8a277b7810714af3,platform,low,false,"The system disengaged due to undesirable performance, indicating in most cases either that the system took longer to operate than the prescribed limits, an exception condition or a software bug. In each of these cases, the AV operator was alerted to take control and did so without the need for the system to achieve a Minimal Risk Condition."
+8a2c7f9d78c70cfa,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for proceeding too slowly through left turn.
+8b35b75d85762b65,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for jerky/wobbly steering.
+8b9b7690ab51f7f0,conditions,medium,false,Driver disengagement due to conditions exceeding ODD
+8c8297acf0d93876,planning,medium,false,Driver disengagement due to planning discrepancy in the determination of autonomous vehicle speed
+8db4aae7d6674bf7,conflict,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for a failure to yield at a required yield.
+8e4e2fcf8a47187f,planning,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because ego vehicle was getting too close to the lead vehicle.
+8e50000a09053454,conditions,medium,false,"Weather(Sunny), Daylight: Computing issue - AV didn't engage at 4 way stop - Car stayed still when it was its turn to go for unknown reason"
+8ee4b9e5bda65b26,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle was not proceeding at a green light.
+8f59cfc649b320b6,controls,medium,false,Safety Driver disengaged due to overly harsh braking.
+9022e1d2e3b8f62d,controls,medium,false,Safety Driver disengaged to proceed through green traffic signal.
+90a4ff74358cad06,platform,low,false,Precautionary disengagement by Safety Driver upon judging that vehicle was too close to road boundary
+94248f858a969752,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for a failure to yield to a pedestrian at a left turn.
+95e7fdb3a0c353a6,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for overly slow approach to a stop sign.
+96f8b141de32d5aa,conditions,medium,false,"Weather(Sunny), Daylight: Safety Decision - 4 way Stop, Car started when it was its turn, impatient driver forced his way (Safety Takeover)"
+9784e5416a08aad5,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to overly slow right turn.
+989194ffa8e84c2e,platform,low,false,Recording module failed unexpectedly.
+99c8da5c5b1459fa,controls,medium,false,Driver disengaged with steering input. Driver took over due to wide right turn into parking lot with a following vehicle.
+9a4f0fecbf3cda68,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for sluggish speed while searching for lane change gap.
+9be60e8b25dd5c78,perception,medium,false,System software failure in the mapping module when detecting an incorrectly mapped traffic light at an intersection in clear weather.
+9f0040b9a1b1c875,planning,medium,false,System software failure in the planning module when approaching an onramp onto the highway in clear weather.
+a07f72ef1c96af9a,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for sudden slowdown approaching crosswalk with vehicle tailing close behind.
+a0efa384a02fdc6f,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to unexpected swerve in response to driver in oncoming lanes travelling straight through a left turn lane.
+a1505e1b2e40c416,conflict,high,true,"The AV didn't yield to vehicle turning left while AV was turning right. As a result, Driver safely disengaged and resumed manual control."
+a26a20d7b3a4c3bd,perception,medium,false,System software failure in the perception module while proceeding straight on an onramp with low traffic on highway in cloudy weather. Hazards activated prior to software disengagement.
+a42c49c120c29cf9,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over because ego vehicle creeped forward at red light behind vehicle.
+a45daaaf186f0a17,planning,medium,false,Driver disengagement due to planning discrepancy causing undesired braking
+a4f0579a56f856d6,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for incomplete lane change at a red light.
+a6aa80aa94a5f65e,conflict,high,true,Planning Logic: Incorrect planner trajectory fails to yield for cross traffic violating right of way
+a6e0530421e60b06,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for ego vehicle slowing down approaching green light.
+a755f83aa0391904,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected braking driving in-lane.
+a7b5cd2a07e2dda0,conflict,high,true,Object Perception: Late perception of oncoming turning agent cuts off Nuro vehicle leading to inadequate yield
+a8757fba3f694ac0,controls,medium,false,An issue with motion control system caused the system to disengage.
+a8f4bcb82c2242b4,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to vehicle creeping forward at red light.
+aace64bd608827e4,planning,high,false,Driver disengaged with steering input. Driver took over because ego vehicle was getting too close to parked cars on the right.
+abd98062c9fa6b2f,perception,high,false,"Safety Driver disengaged autonomous mode to ensure stopping at traffic light or stop line. Root cause: inaccurate traffic light or stop line detection. Conditions: Non-inclement weather, dry roads, no other factors involved."
+ac9401833c721248,perception,medium,false,System software failure in the perception module while stopped at a stoplight at an intersection with an adjacent vehicle in surface street in cloudy weather.
+ad6f474a862a451d,platform,low,false,"Planning trajectory is in timeout, cycle time broken."
+ade6483976cb6a4f,conflict,high,false,Safety Driver disengaged to manually drive past pedestrians near the road.
+aee62f79f5c3959d,controls,high,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to braking caused by other car encroaching in our lane.
+aef859f2d0c7b01b,platform,low,false,Planning Reference Line Searcher module timeout.
+b218fbf7d7bd5b8b,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for ego vehicle creeping into 4-way stop intersection while yielding to pedestrians.
+b3806c229b5f8f16,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for some unexpected braking during a left turn.
+b3bcc0c458f82e9b,conflict,high,false,"The lead vehicle stopped for stop sign was falsely identified as a ""side-parked"" vehicle while AV approached from behind resulting in AV attempting to bypass the lead vehicle. The operator intervened and look over in order to prevent the bypass."
+b3bee9776b212926,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over during lane change due to tailgating vehicle approaching quickly behind.
+b51697bb64a7d9f7,perception,medium,false,"Safety Driver disengaged due to inappropriate braking proposal, caused by perception issue."
+b539fca30b4207db,perception,medium,false,Object Perception: Incorrect perception of railroad crossing leads to unwanted braking with tailgating agent
+b587e804c74cd978,planning,medium,false,Driver disengaged with steering input. Driver took over because ego vehicle went into a fallback trajectory state immediately after engaging.
+b61d79e657c27ac8,planning,medium,false,Driver disengagement due to planning discrepancy in yielding to vehicle cut-in
+b67286084d3e36fd,planning,high,false,Driver disengaged with steering input. Driver took over during split into turning lane because tailgating vehicle was too close.
+b710e2db1d810a2c,controls,medium,false,Safety Driver disengaged due to inappropriate steering.
+b714d59a7a7b02fc,perception,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for traffic light turning yellow with unclear ego vehicle intent.
+b71e8da94c60f645,planning,medium,false,"The AV Test Driver took control from the autonomous system due to undesirable lane placement. AV Test Drivers consider various factors, including the amount of traffic and the behavior of any surrounding vehicles. In addition to their own perception, an in-vehicle display provides input on the vehicle's lane placement. Also incorporated is an advanced system for fluid exchange between the driver and the system without the need for buttons or switches. This allows the AV Test Drivers to take control to provide a transitory adjustment. In this case, the AV Test Driver took control from the autonomous system in response to the lateral movement of the vehicle within the lane."
+b89c1fbb4544b9a3,prediction,medium,false,Prediction Discrepancy: Disengaged due to inconsistent actor vehicle predictions at an intersection while Autonomous Vehicle (AV) is turning right
+b90732b5efdfe685,planning,high,false,"The autonomous system perceives and understands the environment by processing raw camera and radar inputs, detecting surfaces and objects in a scene, and calculating distance, velocity and motion vector for every pixel. Ghost AV Test Drivers are trained to disengage proactively. The AV Test Driver took control based on their assessment that the Ghost vehicle was driving too closely to the preceding vehicle in the particular driving environment."
+b997904ff32b3106,perception,medium,false,"Safety Driver disengaged autonomous mode due to inappropriate braking, caused by perception issue. Root cause: trajectory calculation issue. Conditions: Non-inclement weather, dry roads, no other factors involved."
+bb29933e8c7b1454,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected slowdown approaching intersection.
+bbbf7ad6f0bba864,perception,medium,false,System software failure in the perception module while proceeding straight at low speed on a highway offramp in clear weather.
+bc5b98e119bafcac,planning,medium,false,System software failure in the planning module while entering a cloverleaf ramp on the highway due to a policy disengagement zone in clear weather.
+bc9bbb4ba011b4ea,perception,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for hesitant driving due to various unstable object detections.
+bcefb32579996379,perception,medium,false,Data that Vision received from the Driving State Module is too old.
+bd1994cfc6b3257d,platform,low,false,Driver precautionary disengagement due to aggressive cut-in by other vehicle
+be1d75ee5c00d743,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for parked car on right side suddenly opening driver-side door.
+be892e9cd77f71d2,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle slowed down too quickly in an exit lane.
+bff6a646514994bf,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected braking due to fallback trajectory error state.
+c48e5a9efba95322,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over due to creeping forward at a red light.
+c4e26aa355dcb484,prediction,medium,false,Prediction discrepancy. Late cut-in from other vehicle from adjacent lane.
+c6447246f353567b,planning,high,false,Turning close to curb due to inaccurate controller or path planning
+c9e3c90269184c07,unknown,low,false,Accelerator pedal pressed to increase velocity of the vehicle. Accidental takeover during lane change.
+cc4b64312b96714a,perception,medium,false,System software failure in the perception module while proceeding straight on an onramp with low traffic on highway in cloudy weather.
+cd61eb1859eb8024,planning,high,false,"The AV Test Driver took control from the autonomous system due to undesirable lane placement. AV Test Drivers consider various factors, including the amount of traffic and the behavior of any surrounding vehicles. In addition to their own perception, an in-vehicle display provides input on the vehicle's lane placement. Also incorporated is an advanced system for fluid exchange between the driver and the system without the need for buttons or switches. This allows the AV Test Drivers to take control to provide a transitory adjustment. In this case, the AV Test Driver took control from the autonomous system when the vehicle overrode a lane marker."
+ce19119341192cfa,conflict,high,false,Safety Driver disengaged due to cut-in issue.
+ce5ef8ff5997090b,conflict,high,false,Planning Logic: Incorrect behavior leads to unwanted braking with tailgating cyclist
+cf04e866d6d8b52e,controls,medium,false,Driver disengaged with steering input. Driver took over because ego vehicle was turning right into the far lane instead of the near lane.
+d1bb3452c0b553d3,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for braking on highway in response to vehicles travelling in above overpass.
+d302d62c647a079f,hardware,low,false,The ADS initiated a disengagement due to a diagnosed hardware issue. The Safety Driver was able to safely take control of the vehicle.
+d3118f955846ad1f,conditions,medium,false,"Weather(Sunny), Daylight: Safety Decision - 4 way Stop, Car started when it was his turn, impatient driver forced his way (Safety Takeover)"
+d5227897efec71d4,planning,medium,false,System software failure in the planning module while proceeding straight with low traffic on highway in cloudy weather.
+d5237377d1a0cce0,conditions,medium,false,The AV Test Driver took control of the vehicle due to unexpected road conditions rendering continued AV operation unadvisable. These may include unexpected sun glare or other unplanned conditions.
+d54d2c6c699f4ba1,perception,high,false,"Weather(Sunny), Daylight: Perception Issue - AV too close to front vehicle - Distance Calculation error"
+d7cc6ea07128e43f,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to inappropriate braking for lead vehicle turning right out of our lane.
+da90f974cd75f3de,controls,medium,false,Driver disengaged with steering input. Driver took over for insufficient nudging around a stopped vehicle.
+dc3bcce0d22c6901,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over in response to fallback trajectory error causing braking and veering to the left.
+ddc9e61039e22ed8,planning,medium,false,Planning Logic: Incorrect planner trajectory fails to adequate yield to lead vehicle
+de21102aa6507459,conflict,high,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to ego vehicle getting stuck after yielding to pedestrian in sidewalk.
+deeae1b50aca0800,conditions,medium,false,"Weather(Sunny), Daylight: ODD - Car double parked on our lane - Test car not allowed to go over the double yellow lane marking"
+dfbc76a869bc595b,controls,medium,false,Driver disengaged with steering input. Driver took over because ego vehicle kept attempting to pull over and queue behind parked cars.
+e018eb0b8dc4a984,planning,medium,false,Driver disengagement due to planning discrepancy in yielding to merging vehicle
+e24ba651759475d3,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for ego vehicle unexpectedly slowing down approaching crosswalk with tailing vehicle close behind.
+e27daaa6dd8e055a,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for sudden braking in intersection.
+e2a5674c1c3b9c78,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over because ego vehicle failed to initiate and complete a lane change in the allotted space.
+e3873ae756ba9ae1,conflict,critical,true,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to inappropriate yield point for pedestrians near crosswalk.
+e3bf812584bdd79c,planning,medium,false,"Safety Driver disengaged autonomous mode due to issue with the test vehicle could not perform the lane change into the exit lane or merge to highway and could not follow the planned route. Root cause: traffic situation. Conditions: Non-inclement weather, dry roads, no other factors involved."
+e4ca1b4520f5087b,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over to prevent inappropriate lane change from cutting off other driver.
+e5eec13b996919c9,perception,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for unexpected braking due to false positive collision prediction.
+e78cb385b159988a,perception,medium,false,Perception Discrepancy: Disengaged due to inaccurate vehicle size detection
+e7b72eaeab929de8,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to ego vehicle planning inappropriate lane change.
+e86b13791bd15894,planning,high,false,"Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for slow lane change, getting too close to other vehicle."
+e912a8f5e01a2999,controls,medium,false,Driver disengaged with steering input. Driver took over due to jerky steering while entering left turn lane.
+e9b3c8fd33610e87,localization,high,false,"The Safety driver noticed incorrect map drive lines, causing the AV to drive too close to the curb. As a result, Driver safely disengaged and resumed manual control."
+ea445c310c4a329a,conflict,high,false,Disengage for a recklessly behaving road user
+eafe926b601db061,planning,medium,false,Inaccurate lane-switching due to inaccurate path planning
+eb56ec781b52539b,prediction,medium,false,Prediction discrepancy. Adjacent vehicle made illegal maneuver from left turn only lane.
+ec86f9f42f6eb635,planning,medium,false,A system software failure in the planner module during lane change on surface street in clear weather likely due to the curvature of the mapped lane.
+ecedb7f47fa7f89a,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to inappropriate braking to find lane change gap.
+ede1f7ea755bd4ad,controls,medium,false,Safety Driver disengaged to re-center vehicle in lane.
+ee066d1a6c4ed65b,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over during slow unprotected left turn for vehicle oncoming.
+ee7fc25cada07440,perception,medium,false,"The ADS incorrectly perceived an element in the surrounding environment, which resulted in a motion plan requiring disengagement by the Safety Driver. The Safety Driver was able to safely take control of the vehicle."
+ef0d1e5e20facda0,localization,medium,false,"Weather(Sunny), Daylight: Computing issue - Software Crash - Localization component stopped working for unknown reasons"
+ef7b2985d1828295,planning,high,false,"The ADS generated a motion plan that would have placed the vehicle in an incorrect location on the roadway, requiring the Safety Driver to disengage. The Safety Driver was able to safely take control of the vehicle."
+efef003c512c9fc8,controls,medium,false,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for ego vehicle failing to yield to oncoming traffic during left turn.
+f1b9ecf0888b890f,perception,medium,false,System software failure in the perception module while proceeding straight with low traffic on highway in cloudy weather. Disengagement occurred when AV attempted to lane change.
+f27ade5d70a303d0,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for pedestrians suddenly entering the roadway.
+f4204f0d800e246e,localization,medium,false,Driver disengagement due to safety monitor notification of positioning error
+f5a00d4dda7db940,planning,medium,false,"The AV was initiating a lane change, another vehicle was already on the other lane. As a result, the driver safely disengaged and resumed manual control."
+f6a5fcef7056a742,conflict,critical,true,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over due to improper yielding to a pedestrian near roadway during left turn.
+f710d6a2658d1247,planning,medium,false,Planning Logic: Incorrect behavior leads to unwanted braking with tailgating agent
+f738da2545b52ba8,platform,low,false,Driver disengagement due to safety monitor notification of system load
+f7458096624cdbf8,localization,high,false,"The Safety driver noticed incorrect map drive lines, causing the AV to drive too close to the the inner radius of a right hand turn. As a result, Driver safely disengaged and resumed manual control."
+f841023b1cdab694,planning,low,false,The ADS initiated a disengagement due to a diagnosed issue with the motion plan. The Safety Driver was able to safely take control of the vehicle.
+f8567a15bf55fe85,planning,high,false,Planning Discrepancy: Disengaged due to insufficient lateral clearance to the curb while performing a lane change
+f8b4cedf02fb9244,platform,low,false,Precautionary Takeover: Disengaged due to a vehicle platform software issue related to the sensor data processing pipelines
+f965ca16fa4082be,planning,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for ego vehicle attempting lane change without enough space.
+f9c1aadb2ea602d5,prediction,medium,false,Late deceleration due to incorrect behaviour prediction of another traffic participant
+fa1506e3c560028d,controls,medium,false,Accelerator pedal pressed to increase velocity of the vehicle. Driver took over for inappropriate braking near parked car.
+fc759334dad004fa,planning,medium,false,A system software failure in the planner module during lane change on surface street approaching an intersection in cloudy weather likely due to the curvature of the mapped lane.
+fe32fd1866c6b296,hardware,low,false,Hardware discrepancy or system fault; On city road in light traffic with clear sky during day
+fe93343097b8c011,conflict,critical,true,Brake pedal pressed to reduce the velocity of the vehicle. Driver took over for improper yielding at a crosswalk with approaching pedestrians.
